@@ -6,19 +6,20 @@
 		<groupId>com.web</groupId>
 		<artifactId>web-admin</artifactId>
 		<version>1.0.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.web</groupId>
+	<!--<groupId>com.web</groupId>-->
 	<artifactId>admin</artifactId>
 	<version>1.0.0</version>
 	<name>admin</name>
+	<packaging>jar</packaging>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.web</groupId>
-			<artifactId>model</artifactId>
-			<version>1.0.0</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.web</groupId>-->
+			<!--<artifactId>model</artifactId>-->
+			<!--<version>1.0.0</version>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>com.web</groupId>
 			<artifactId>common</artifactId>

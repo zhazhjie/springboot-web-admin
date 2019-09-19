@@ -6,9 +6,9 @@
 		<groupId>com.web</groupId>
 		<artifactId>web-admin</artifactId>
 		<version>1.0.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.web</groupId>
+	<!--<groupId>com.web</groupId>-->
 	<artifactId>model</artifactId>
 	<version>1.0.0</version>
 	<name>model</name>
@@ -17,13 +17,5 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
