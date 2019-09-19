@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.web</groupId>
+	<artifactId>web-admin</artifactId>
+	<version>1.0.0</version>
+	<name>web-admin</name>
+	<packaging>pom</packaging>
+	<modules>
+		<module>admin</module>
+		<module>common</module>
+		<module>model</module>
+	</modules>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
+		<maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<springboot.version>2.1.7.RELEASE</springboot.version>
+		<druid.version>1.1.10</druid.version>
+		<mybatis-plus.version>3.0.5</mybatis-plus.version>
+		<mybatisplus.spring.boot.version>3.0.5</mybatisplus.spring.boot.version>
+		<mysql.version>5.1.44</mysql.version>
+		<shiro.version>1.4.0</shiro.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<redis.version>2.0.8.RELEASE</redis.version>
+		<jedis.version>2.9.0</jedis.version>
+		<freemarker.version>2.3.23</freemarker.version>
+		<fastjson.version>1.2.46</fastjson.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang.version}</version>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${springboot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

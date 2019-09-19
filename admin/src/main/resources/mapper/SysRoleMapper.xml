@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.admin.modules.sys.mapper.SysRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.web.admin.modules.sys.entity.po.SysRole">
+        <result column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="role_name" property="roleName"/>
+        <result column="remark" property="remark"/>
+        <result column="create_by" property="createBy"/>
+        <collection property="permissionIdList" ofType="java.lang.Long">
+            <result column="permission_id" property="permissionId"/>
+        </collection>
+    </resultMap>
+    <select id="listRole" resultMap="BaseResultMap">
+      select a.*,b.permission_id from
+      (select a.* from sys_role a limit #{params.curPage}, #{params.limit}) a
+      left join sys_role_permission b on a.id=b.role_id
+      where 1=1
+        <if test="params.keyword!=null and params.keyword!=''">
+            and a.role_name like concat('%',#{params.keyword},'%')
+        </if>
+        order by a.id desc
+    </select>
+
+    <select id="countRole" resultType="java.lang.Integer">
+        select count(1) from sys_role a
+        where 1=1
+        <if test="params.keyword!=null and params.keyword!=''">
+            and a.role_name like concat('%',#{params.keyword},'%')
+        </if>
+    </select>
+</mapper>

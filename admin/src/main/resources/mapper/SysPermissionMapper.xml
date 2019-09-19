@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.admin.modules.sys.mapper.SysPermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.web.admin.modules.sys.entity.po.SysPermission">
+        <id column="id" property="id"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="permission_flag" property="permissionFlag"/>
+        <result column="type" property="type"/>
+        <result column="icon" property="icon"/>
+        <result column="state" property="state"/>
+        <result column="sort" property="sort"/>
+        <result column="hidden" property="hidden"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    <select id="listPermission" resultMap="BaseResultMap">
+        select DISTINCT * from sys_permission
+        where 1=1
+        <if test="params.keyword!=null and params.keyword!=''">
+            and name like concat('%',#{params.keyword},'%')
+        </if>
+        order by sort
+    </select>
+
+
+    <select id="listUserPermission" resultMap="BaseResultMap">
+        select DISTINCT a.* from sys_permission a
+        left join sys_role_permission b on a.id=b.permission_id
+        left join sys_user_role c on b.role_id=c.role_id
+        where 1=1
+        <if test="userId!=null">
+            and c.user_id = #{userId}
+        </if>
+        <if test="type!=null">
+            and a.type = #{type}
+        </if>
+        order by a.sort
+    </select>
+</mapper>
