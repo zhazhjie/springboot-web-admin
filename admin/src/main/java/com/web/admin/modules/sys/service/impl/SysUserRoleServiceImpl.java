@@ -21,7 +21,7 @@ import java.util.List;
 public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUserRole> implements SysUserRoleService {
     @Override
     public void saveUserRole(Long userId, List<Long> roleIds) {
-        if (roleIds == null) return;
+        if (roleIds == null || roleIds.size() == 0) return;
         roleIds.forEach(roleId -> {
             SysUserRole sysUserRole = new SysUserRole();
             sysUserRole.setRoleId(roleId);

@@ -34,7 +34,7 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
 
     @Override
     public void saveRolePermission(Long roleId, List<Long> permissionIds) {
-        if (permissionIds == null) return;
+        if (permissionIds == null || permissionIds.size() == 0) return;
         ArrayList<SysRolePermission> sysRolePermissionList = new ArrayList<>();
         permissionIds.forEach(permissionId -> {
             SysRolePermission sysRolePermission = new SysRolePermission();
