@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public abstract class BaseModel implements Serializable {
+public class BaseModel implements Serializable {
 
 
     @TableId
