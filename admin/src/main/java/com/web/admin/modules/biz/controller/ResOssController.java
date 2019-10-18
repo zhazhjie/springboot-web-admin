@@ -114,6 +114,7 @@ public class ResOssController {
             bos.write(bytes);
             return pathPrefix + format + fileName;
         } catch (Exception e) {
+            log.error("上传失败：{}",e);
             throw new WebException("上传失败！");
         } finally {
             if (bos != null) {

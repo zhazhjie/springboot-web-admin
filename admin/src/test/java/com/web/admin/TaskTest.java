@@ -60,7 +60,7 @@ public class TaskTest {
                 int planRefundTimes = dayRefundTimes;
                 for (int j = 0; j < dayConsumeTimes; j++) {
                     long num = curCardBalance.divide(consumerQuotaLD, 0, RoundingMode.DOWN).longValue();
-                    if(num<dayConsumeTimes||planCardBalance.compareTo(consumerQuotaLD) < 0){
+                    if (num < dayConsumeTimes || planCardBalance.compareTo(consumerQuotaLD) < 0) {
 
                     }
                     if (j == 0 || (planCardBalance.compareTo(BigDecimal.ONE) < 0 && planRefundTimes > 0)) {
@@ -173,9 +173,9 @@ public class TaskTest {
 //            System.out.println("新还款总额:" + planResult.getRefundTotalAmount().subtract(planResult.getTotalServiceFee()));
 //            System.out.println("新任务:" + planList);
 //        }
-//
-//        long endTime = System.currentTimeMillis();
-//        System.out.print("用时：" + (endTime - startTime) + "ms");
+
+        long endTime = System.currentTimeMillis();
+        System.out.print("用时：" + (endTime - startTime) + "ms");
     }
 
 }
