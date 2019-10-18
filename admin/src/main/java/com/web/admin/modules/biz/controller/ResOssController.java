@@ -32,7 +32,7 @@ public class ResOssController {
     @Autowired
     private ResOssService resOssService;
 
-    private String pathPrefix = "/public/upload/images/";
+    private String pathPrefix = "/upload/images/";
 
 
     @PostMapping("/upload")
@@ -99,7 +99,7 @@ public class ResOssController {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String format = simpleDateFormat.format(date)+"/";
-        String filePath = this.getClass().getClassLoader().getResource("").getPath() + pathPrefix + format;
+        String filePath = System.getProperty("user.dir") + pathPrefix + format;
         File dir = new File(filePath);
         if (!dir.exists() && !dir.isDirectory()) {
             dir.mkdirs();
