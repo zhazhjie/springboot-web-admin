@@ -2,13 +2,14 @@ package com.web.admin.modules.sys.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.web.admin.config.ShiroCacheManager;
+import com.web.admin.common.BaseController;
 import com.web.admin.modules.sys.entity.dto.SysUserDTO;
 import com.web.admin.modules.sys.entity.po.SysUser;
 import com.web.admin.modules.sys.service.SysUserService;
 import com.web.common.utils.SysConstant;
 import com.web.common.utils.ResponseData;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,12 +40,15 @@ public class SysUserController extends BaseController {
 
     @GetMapping("/info")
     public ResponseData info() {
-        return ResponseData.success(getUser());
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        BeanUtils.copyProperties(getUser(),sysUserDTO);
+        return ResponseData.success(sysUserDTO);
     }
 
     @PostMapping("/update")
     @RequiresPermissions("sys:user:update")
     public ResponseData update(@RequestBody @Valid SysUserDTO sysUserDTO) {
+        sysUserDTO.setUpdateBy(getUser().getId());
         sysUserService.update(sysUserDTO);
         return ResponseData.success();
     }
@@ -52,6 +56,7 @@ public class SysUserController extends BaseController {
     @PutMapping("/add")
     @RequiresPermissions("sys:user:add")
     public ResponseData add(@RequestBody @Valid SysUserDTO sysUserDTO) {
+        sysUserDTO.setCreateBy(getUser().getId());
         sysUserService.add(sysUserDTO);
         return ResponseData.success(SysConstant.INITIAL_PASSWORD);
     }

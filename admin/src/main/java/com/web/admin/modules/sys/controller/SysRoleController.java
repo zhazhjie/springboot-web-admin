@@ -2,6 +2,7 @@ package com.web.admin.modules.sys.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.web.admin.common.BaseController;
 import com.web.admin.modules.sys.entity.po.SysRole;
 import com.web.admin.modules.sys.service.SysRoleService;
 import com.web.common.utils.ResponseData;
@@ -23,7 +24,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/sys/role")
-public class SysRoleController {
+public class SysRoleController extends BaseController {
     @Autowired
     SysRoleService sysRoleService;
 

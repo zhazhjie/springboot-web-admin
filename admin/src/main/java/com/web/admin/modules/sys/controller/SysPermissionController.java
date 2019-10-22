@@ -1,6 +1,7 @@
 package com.web.admin.modules.sys.controller;
 
 
+import com.web.admin.common.BaseController;
 import com.web.admin.modules.sys.entity.po.SysPermission;
 import com.web.admin.modules.sys.service.SysPermissionService;
 import com.web.common.utils.SysConstant;

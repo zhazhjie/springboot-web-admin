@@ -26,17 +26,6 @@ public class SysUserDTO extends BaseModel {
     private String username;
 
     /**
-     * 密码
-     */
-//    @NotBlank(message = "密码不能为空")
-    private String password;
-
-    /**
-     * 盐
-     */
-//    private String salt;
-
-    /**
      * 邮箱
      */
     private String email;
@@ -55,11 +44,6 @@ public class SysUserDTO extends BaseModel {
      * 状态  1：正常   0：禁用
      */
     private Integer state;
-
-    /**
-     * 是否已删除 0：未删除 1：已删除
-     */
-//    private Integer delFlag;
 
     /**
      * 创建人

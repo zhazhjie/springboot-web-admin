@@ -65,7 +65,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         String salt = RandomStringUtils.randomAlphanumeric(20);
         sysUser.setPassword(new Sha256Hash(SysConstant.INITIAL_PASSWORD, salt).toHex());
         sysUser.setSalt(salt);
-        sysUser.setCreateBy(1L);
         baseMapper.insert(sysUser);
         sysUserRoleService.saveUserRole(sysUser.getId(),sysUserDTO.getRoleIdList());
     }
@@ -75,11 +74,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SysUser existUser = this.getUserById(sysUserDTO.getId());
         AssertUtil.notNull(existUser,"用户不存在");
         SysUser sysUser = new SysUser();
-        sysUser.setId(sysUserDTO.getId());
-        sysUser.setUsername(sysUserDTO.getUsername());
-        sysUser.setPhone(sysUserDTO.getPhone());
-        sysUser.setEmail(sysUserDTO.getEmail());
-        sysUser.setState(sysUserDTO.getState());
+        BeanUtils.copyProperties(sysUserDTO,sysUser);
         baseMapper.updateById(sysUser);
         sysUserRoleService.deleteByUserId(sysUserDTO.getId());
         sysUserRoleService.saveUserRole(sysUser.getId(),sysUserDTO.getRoleIdList());

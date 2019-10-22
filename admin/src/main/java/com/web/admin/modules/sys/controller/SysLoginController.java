@@ -1,9 +1,8 @@
 package com.web.admin.modules.sys.controller;
 
-import com.web.admin.config.ShiroCacheManager;
+import com.web.admin.common.BaseController;
 import com.web.admin.modules.sys.entity.dto.UserLoginDTO;
 import com.web.admin.modules.sys.entity.po.SysUser;
-import com.web.admin.modules.sys.entity.po.SysUserToken;
 import com.web.admin.modules.sys.service.SysUserService;
 import com.web.admin.modules.sys.service.SysUserTokenService;
 import com.web.common.utils.AssertUtil;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sys")
-public class SysLoginController extends BaseController{
+public class SysLoginController extends BaseController {
     @Autowired
     SysUserService sysUserService;
     @Autowired

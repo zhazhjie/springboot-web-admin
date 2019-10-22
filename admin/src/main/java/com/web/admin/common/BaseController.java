@@ -1,4 +1,4 @@
-package com.web.admin.modules.sys.controller;
+package com.web.admin.common;
 
 import com.web.admin.modules.sys.entity.po.SysUser;
 import org.apache.shiro.SecurityUtils;
