@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
@@ -48,6 +49,7 @@ public class CodeGenerator {
         gc.setEntityName("%s");
         gc.setServiceName("%sService");
         gc.setBaseResultMap(true);
+        gc.setDateType(DateType.ONLY_DATE);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -107,10 +109,10 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.web.model.BaseModel");
+        strategy.setSuperEntityClass("com.web.admin.common.BaseModel");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
-//        strategy.setSuperControllerClass("com.web.admin.BaseController");
+        strategy.setSuperControllerClass("com.web.admin.common.BaseController");
         strategy.setInclude(scanner("表名"));
         strategy.setSuperEntityColumns("id","create_time","update_time");
         strategy.setControllerMappingHyphenStyle(true);
