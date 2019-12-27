@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.web.admin.config.ShiroCacheManager;
+import com.web.admin.modules.sys.entity.dto.PasswordDTO;
 import com.web.admin.modules.sys.entity.dto.SysUserDTO;
 import com.web.admin.modules.sys.entity.po.SysUser;
 import com.web.admin.modules.sys.mapper.SysUserMapper;
@@ -111,5 +112,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public String login(Long userId) {
         return sysUserTokenService.buildLoginToken(userId);
+    }
+
+    @Override
+    public void updatePassword(PasswordDTO passwordDTO) {
+        SysUser sysUser = new SysUser();
+        String salt = RandomStringUtils.randomAlphanumeric(20);
+        sysUser.setPassword(new Sha256Hash(passwordDTO.getNewPassword(), salt).toHex());
+        sysUser.setSalt(salt);
+        sysUser.setId(passwordDTO.getUserId());
+        baseMapper.updateById(sysUser);
     }
 }

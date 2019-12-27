@@ -1,6 +1,7 @@
 package com.web.admin.modules.sys.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.web.admin.modules.sys.entity.dto.PasswordDTO;
 import com.web.admin.modules.sys.entity.dto.SysUserDTO;
 import com.web.admin.modules.sys.entity.po.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -32,4 +33,6 @@ public interface SysUserService extends IService<SysUser> {
     void resetPassword(Long userId);
 
     String login(Long userId);
+
+    void updatePassword(PasswordDTO passwordDTO);
 }

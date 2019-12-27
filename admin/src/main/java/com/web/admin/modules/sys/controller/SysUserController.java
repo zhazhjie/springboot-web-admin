@@ -3,12 +3,14 @@ package com.web.admin.modules.sys.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.web.admin.common.BaseController;
+import com.web.admin.modules.sys.entity.dto.PasswordDTO;
 import com.web.admin.modules.sys.entity.dto.SysUserDTO;
-import com.web.admin.modules.sys.entity.po.SysUser;
 import com.web.admin.modules.sys.service.SysUserService;
-import com.web.common.utils.SysConstant;
+import com.web.common.utils.AssertUtil;
 import com.web.common.utils.ResponseData;
+import com.web.common.utils.SysConstant;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +75,15 @@ public class SysUserController extends BaseController {
     public ResponseData resetPassword(@PathVariable Long userId) {
         sysUserService.resetPassword(userId);
         return ResponseData.success(SysConstant.INITIAL_PASSWORD);
+    }
+
+    @PostMapping("/updatePassword")
+    @RequiresPermissions("sys:user:updatePassword")
+    public ResponseData updatePassword(@RequestBody PasswordDTO passwordDTO) {
+        AssertUtil.isTrue(getUser().getPassword().equals(new Sha256Hash(passwordDTO.getPassword(),getUser().getSalt()).toHex()),"原密码不正确");
+        passwordDTO.setUserId(getUser().getId());
+        sysUserService.updatePassword(passwordDTO);
+        return ResponseData.success();
     }
 
 }
