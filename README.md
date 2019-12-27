@@ -2,9 +2,9 @@
 
 > 技术栈：springboot + mybatis-plus + mysql + redis + shiro
 
-* 统一数据返回格式、long转string、格式化date...
+* 集成fastjson消息转换器，格式化响应报文
 
-* 自定义异常处理，捕获不同异常类返回统一数据格式
+* 自定义业务异常，捕获并响应统一数据格式
 
 * 集成shiro权限管理，基于redis缓存权限
 
@@ -16,6 +16,4 @@
 
 > 部署 jenkins
 
-> 预览图
-
-<img src="https://github.com/zhazhjie/springboot-web-admin/blob/master/public/preview.png?raw=true">
+> 预览 [戳这里](http://134.175.20.183/admin)
