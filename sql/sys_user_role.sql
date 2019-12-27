@@ -1,45 +1,38 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : localhost
-Source Server Version : 80012
-Source Host           : 127.0.0.1:3306
-Source Database       : test
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 80017
+ Source Host           : localhost:3306
+ Source Schema         : test
 
-Target Server Type    : MYSQL
-Target Server Version : 80012
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 80017
+ File Encoding         : 65001
 
-Date: 2019-09-05 17:44:04
+ Date: 27/12/2019 23:21:19
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for sys_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
-CREATE TABLE `sys_user_role` (
+CREATE TABLE `sys_user_role`  (
   `id` bigint(20) NOT NULL COMMENT '编号',
   `user_id` bigint(20) NOT NULL COMMENT '用户ID',
   `role_id` bigint(20) NOT NULL COMMENT '角色ID',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='用户角色关系表';
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色关系表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('1156504102115921922', '1156504102032035842', '1156503917231001602', '2019-07-31 17:57:19', '2019-07-31 17:57:19');
-INSERT INTO `sys_user_role` VALUES ('1156516398267551745', '1156516398133334018', '1156503917231001602', '2019-07-31 18:46:11', '2019-07-31 18:46:11');
-INSERT INTO `sys_user_role` VALUES ('1156516495214694402', '1156516495197917185', '1156503917231001602', '2019-07-31 18:46:34', '2019-07-31 18:46:34');
-INSERT INTO `sys_user_role` VALUES ('1156516624025964545', '1156516624000798722', '1156503917231001602', '2019-07-31 18:47:05', '2019-07-31 18:47:05');
-INSERT INTO `sys_user_role` VALUES ('1156551877163667457', '1156551877146890241', '1156551789343330306', '2019-07-31 21:07:10', '2019-07-31 21:07:10');
-INSERT INTO `sys_user_role` VALUES ('1156876079221645313', '1156876079070650370', '1156876025341616130', '2019-08-01 18:35:26', '2019-08-01 18:35:26');
-INSERT INTO `sys_user_role` VALUES ('1156876219122655234', '1156876219089100802', '1156876025341616130', '2019-08-01 18:35:59', '2019-08-01 18:35:59');
-INSERT INTO `sys_user_role` VALUES ('1156876247933329410', '1156876140638838785', '1156876025341616130', '2019-08-01 18:36:06', '2019-08-01 18:36:06');
-INSERT INTO `sys_user_role` VALUES ('1157171025220608002', '1157171025145110530', '1156551789343330306', '2019-08-02 14:07:26', '2019-08-02 14:07:26');
-INSERT INTO `sys_user_role` VALUES ('1157171068581322754', '1157171068564545537', '1156551789343330306', '2019-08-02 14:07:37', '2019-08-02 14:07:37');
-INSERT INTO `sys_user_role` VALUES ('1169520314571223041', '1169510615008346113', '1156503917231001602', '2019-09-05 15:59:06', '2019-09-05 15:59:06');
-INSERT INTO `sys_user_role` VALUES ('1169520314923544578', '1169510615008346113', '1156551789343330306', '2019-09-05 15:59:06', '2019-09-05 15:59:06');
+INSERT INTO `sys_user_role` VALUES (1210578048058179585, 2, 2, '2019-12-27 23:07:53', '2019-12-27 23:07:53');
+
+SET FOREIGN_KEY_CHECKS = 1;

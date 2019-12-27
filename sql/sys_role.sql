@@ -1,37 +1,39 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : localhost
-Source Server Version : 80012
-Source Host           : 127.0.0.1:3306
-Source Database       : test
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 80017
+ Source Host           : localhost:3306
+ Source Schema         : test
 
-Target Server Type    : MYSQL
-Target Server Version : 80012
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 80017
+ File Encoding         : 65001
 
-Date: 2019-09-05 17:43:28
+ Date: 27/12/2019 23:21:02
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
-CREATE TABLE `sys_role` (
+CREATE TABLE `sys_role`  (
   `id` bigint(20) NOT NULL,
-  `role_name` varchar(100) NOT NULL COMMENT '角色名称',
-  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `role_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色名称',
+  `remark` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
-  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='角色';
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1156503917231001602', '商品管理员', '', '1', '2019-07-31 17:56:35', '2019-07-31 17:56:35');
-INSERT INTO `sys_role` VALUES ('1156551789343330306', '点点总部管理', '', '1', '2019-07-31 21:06:49', '2019-08-08 18:22:16');
-INSERT INTO `sys_role` VALUES ('1156876025341616130', '订单管理员', '', '1', '2019-08-01 18:35:13', '2019-08-01 18:35:13');
+INSERT INTO `sys_role` VALUES (2, '访客', '', NULL, '2019-09-22 22:04:36', '2019-12-27 23:07:41');
+
+SET FOREIGN_KEY_CHECKS = 1;
