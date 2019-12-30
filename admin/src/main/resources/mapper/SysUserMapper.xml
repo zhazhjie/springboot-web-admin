@@ -37,8 +37,11 @@
         from ( select a.* from sys_user a limit #{params.curPage}, #{params.limit}) a
         left join sys_user_role b on a.id=b.user_id
         where a.del_flag=0
-        <if test="params.keyword!=null and params.keyword!=''">
-            and a.username like concat('%',#{params.keyword},'%')
+        <if test="params.userName!=null and params.userName!=''">
+            and a.username like concat('%',#{params.userName},'%')
+        </if>
+        <if test="params.state!=null and params.state!=''">
+            and a.state like concat('%',#{params.state},'%')
         </if>
         order by a.id desc
     </select>
