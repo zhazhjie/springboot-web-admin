@@ -26,8 +26,8 @@ public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenMapper, Sys
         //生成一个token
         String token = TokenGenerator.generateValue();
         Date now = new Date();
-        Date expireTime = new Date(now.getTime()+ SysConstant.LOGIN_EXPIRE_TIME);
-        SysUserToken userToken = baseMapper.selectOne(new LambdaQueryWrapper<SysUserToken>().eq(SysUserToken::getUserId,userId));;
+        Date expireTime = new Date(now.getTime() + SysConstant.LOGIN_EXPIRE_TIME);
+        SysUserToken userToken = baseMapper.selectOne(new LambdaQueryWrapper<SysUserToken>().eq(SysUserToken::getUserId, userId));
         if (userToken == null) {
             userToken = new SysUserToken();
             userToken.setUserId(userId);
@@ -35,7 +35,7 @@ public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenMapper, Sys
             userToken.setUpdateTime(now);
             userToken.setExpireTime(expireTime);
             baseMapper.insert(userToken);
-        } else {
+        } else if (userToken.getExpireTime().getTime() < System.currentTimeMillis()) {
             userToken.setToken(token);
             userToken.setUpdateTime(now);
             userToken.setExpireTime(expireTime);
@@ -46,11 +46,11 @@ public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenMapper, Sys
 
     @Override
     public SysUserToken getUserToken(String token) {
-        return baseMapper.selectOne(new LambdaQueryWrapper<SysUserToken>().eq(SysUserToken::getToken,token));
+        return baseMapper.selectOne(new LambdaQueryWrapper<SysUserToken>().eq(SysUserToken::getToken, token));
     }
 
     @Override
     public void deleteUserToken(Long userId) {
-        baseMapper.delete(new LambdaQueryWrapper<SysUserToken>().eq(SysUserToken::getUserId,userId));
+        baseMapper.delete(new LambdaQueryWrapper<SysUserToken>().eq(SysUserToken::getUserId, userId));
     }
 }
