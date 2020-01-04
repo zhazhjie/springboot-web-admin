@@ -16,4 +16,4 @@
 
 > 部署 jenkins
 
-> 预览 [戳这里](http://134.175.20.183/admin)
+> 预览 [戳这里](https://flyss.top/admin)
