@@ -1,4 +1,4 @@
-package com.web.admin.config;
+package com.web.admin.shiro;
 
 import com.web.common.utils.SysConstant;
 import org.apache.shiro.mgt.SecurityManager;

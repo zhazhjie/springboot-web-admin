@@ -41,7 +41,7 @@ public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenMapper, Sys
             userToken.setExpireTime(expireTime);
             baseMapper.updateById(userToken);
         }
-        return token;
+        return userToken.getToken();
     }
 
     @Override

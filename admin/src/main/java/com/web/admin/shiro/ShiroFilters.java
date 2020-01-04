@@ -1,4 +1,4 @@
-package com.web.admin.config;
+package com.web.admin.shiro;
 
 import com.alibaba.fastjson.JSON;
 import com.web.common.utils.ResponseData;

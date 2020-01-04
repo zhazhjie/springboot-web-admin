@@ -1,4 +1,4 @@
-package com.web.admin.config;
+package com.web.admin.shiro;
 
 import com.web.admin.modules.sys.entity.po.SysPermission;
 import com.web.admin.modules.sys.entity.po.SysUser;

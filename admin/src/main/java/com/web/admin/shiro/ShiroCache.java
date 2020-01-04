@@ -1,4 +1,4 @@
-package com.web.admin.config;
+package com.web.admin.shiro;
 
 import org.apache.shiro.cache.CacheException;
 import org.springframework.cache.Cache;
