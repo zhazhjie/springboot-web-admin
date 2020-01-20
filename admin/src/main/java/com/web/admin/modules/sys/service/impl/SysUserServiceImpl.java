@@ -110,6 +110,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public String login(Long userId) {
+        SysUser sysUser = baseMapper.selectById(userId);
+        shiroCacheManager.remove(sysUser.toString());
         return sysUserTokenService.buildLoginToken(userId);
     }
 
