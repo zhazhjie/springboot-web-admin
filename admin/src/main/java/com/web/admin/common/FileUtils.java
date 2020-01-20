@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Slf4j
 public class FileUtils {
-    public static  String pathPrefix = "/cache/upload/images/";
+    public static  String pathPrefix = "/workspace/cache/upload/images/";
 
     public static String saveFile(InputStream inputStream, String base64, String fileName) {
         File file = null;
@@ -19,7 +19,7 @@ public class FileUtils {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String format = simpleDateFormat.format(date) + "/";
-        String filePath = System.getProperty("user.dir") + pathPrefix + format;
+        String filePath = pathPrefix + format;
         File dir = new File(filePath);
         if (!dir.exists() && !dir.isDirectory()) {
             dir.mkdirs();
