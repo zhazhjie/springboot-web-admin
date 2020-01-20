@@ -1,6 +1,5 @@
 package com.web.admin.common;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.web.common.exception.WebException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,7 +10,8 @@ import java.util.Date;
 
 @Slf4j
 public class FileUtils {
-    public static  String pathPrefix = "/workspace/cache/upload/images/";
+    private static String WORKSPACE = "/workspace";
+    private static  String PATH_PREFIX = "/cache/upload/images/";
 
     public static String saveFile(InputStream inputStream, String base64, String fileName) {
         File file = null;
@@ -19,7 +19,7 @@ public class FileUtils {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         String format = simpleDateFormat.format(date) + "/";
-        String filePath = pathPrefix + format;
+        String filePath = WORKSPACE + PATH_PREFIX + format;
         File dir = new File(filePath);
         if (!dir.exists() && !dir.isDirectory()) {
             dir.mkdirs();
@@ -39,7 +39,7 @@ public class FileUtils {
                 byte[] bytes = Base64.getDecoder().decode(base64);
                 bos.write(bytes);
             }
-            return pathPrefix + format + fileName;
+            return PATH_PREFIX + format + fileName;
         } catch (Exception e) {
             log.error("上传失败：{}", e);
             throw new WebException("上传失败！");
