@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.web.admin.common.BaseController;
 import com.web.admin.modules.sys.entity.dto.PasswordDTO;
 import com.web.admin.modules.sys.entity.dto.SysUserDTO;
+import com.web.admin.modules.sys.entity.dto.UserLoginDTO;
+import com.web.admin.modules.sys.entity.po.SysUser;
 import com.web.admin.modules.sys.service.SysUserService;
+import com.web.admin.modules.sys.service.SysUserTokenService;
 import com.web.common.utils.AssertUtil;
 import com.web.common.utils.ResponseData;
 import com.web.common.utils.SysConstant;
@@ -28,10 +31,12 @@ import java.util.Map;
  * @since 2019-09-04
  */
 @RestController
-@RequestMapping("/sys/user")
+@RequestMapping("/sysUser")
 public class SysUserController extends BaseController {
     @Autowired
     SysUserService sysUserService;
+    @Autowired
+    SysUserTokenService sysUserTokenService;
 
     @GetMapping("/listPage")
     @RequiresPermissions("sys:user:list")
@@ -47,7 +52,7 @@ public class SysUserController extends BaseController {
         return ResponseData.success(sysUserDTO);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/updateById")
     @RequiresPermissions("sys:user:update")
     public ResponseData update(@RequestBody @Valid SysUserDTO sysUserDTO) {
         sysUserDTO.setUpdateBy(getUser().getId());
@@ -55,7 +60,7 @@ public class SysUserController extends BaseController {
         return ResponseData.success();
     }
 
-    @PutMapping("/add")
+    @PostMapping("/save")
     @RequiresPermissions("sys:user:add")
     public ResponseData add(@RequestBody @Valid SysUserDTO sysUserDTO) {
         sysUserDTO.setCreateBy(getUser().getId());
@@ -63,10 +68,10 @@ public class SysUserController extends BaseController {
         return ResponseData.success(SysConstant.INITIAL_PASSWORD);
     }
 
-    @DeleteMapping("/delete")
+    @GetMapping("/deleteById")
     @RequiresPermissions("sys:user:delete")
-    public ResponseData delete(@RequestBody List<Long> ids) {
-        sysUserService.delete(ids);
+    public ResponseData delete(@RequestParam Long id) {
+        sysUserService.removeById(id);
         return ResponseData.success();
     }
 
@@ -83,6 +88,22 @@ public class SysUserController extends BaseController {
         AssertUtil.isTrue(getUser().getPassword().equals(new Sha256Hash(passwordDTO.getPassword(),getUser().getSalt()).toHex()),"原密码不正确");
         passwordDTO.setUserId(getUser().getId());
         sysUserService.updatePassword(passwordDTO);
+        return ResponseData.success();
+    }
+
+    @PostMapping("/login")
+    public ResponseData login(@RequestBody UserLoginDTO dto) {
+        SysUser user = sysUserService.getUserByUsername(dto.getUsername());
+        AssertUtil.notNull(user,"用户不存在");
+        AssertUtil.isTrue(SysConstant.YES.equals(user.getState()),"账号已被锁定，请联系管理员");
+        AssertUtil.isTrue(user.getPassword().equals(new Sha256Hash(dto.getPassword(),user.getSalt()).toHex()),"账号或密码不正确");
+        String token = sysUserService.login(user.getId());
+        return ResponseData.success(token);
+    }
+
+    @PostMapping("/logout")
+    public ResponseData logout() {
+        sysUserTokenService.deleteUserToken(getUser().getId());
         return ResponseData.success();
     }
 

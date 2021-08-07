@@ -13,8 +13,8 @@ import lombok.Data;
  * @since 2019-09-04
  */
 @Data
-@TableName("sys_permission")
-public class SysPermission extends BaseModel {
+@TableName("sys_menu")
+public class SysMenu extends BaseModel {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,22 +26,22 @@ public class SysPermission extends BaseModel {
     /**
      * 权限名称
      */
-    private String name;
+    private String menuName;
 
     /**
      * 菜单对应组件的路径或接口URL
      */
-    private String url;
+    private String path;
 
     /**
      * 授权标识 (如：sys:user:list)
      */
-    private String permissionFlag;
+    private String perms;
 
     /**
      * 类型 0：菜单，1：接口
      */
-    private Integer type;
+    private Integer menuType;
 
     /**
      * 菜单图标 (类型为菜单时选填)
@@ -61,6 +61,6 @@ public class SysPermission extends BaseModel {
     /**
      * 在导航菜单中隐藏 1 隐藏，0 显示 (类型为菜单时选填)
      */
-    private Integer hidden;
+    private Integer hideFlag;
 
 }

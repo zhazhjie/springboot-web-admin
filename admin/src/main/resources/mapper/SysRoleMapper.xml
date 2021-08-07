@@ -10,14 +10,14 @@
         <result column="role_name" property="roleName"/>
         <result column="remark" property="remark"/>
         <result column="create_by" property="createBy"/>
-        <collection property="permissionIdList" ofType="java.lang.Long">
-            <result column="permission_id" property="permissionId"/>
+        <collection property="menuIdList" ofType="java.lang.Long">
+            <result column="menu_id" property="menuId"/>
         </collection>
     </resultMap>
     <select id="listRole" resultMap="BaseResultMap">
-      select a.*,b.permission_id from
+      select a.*,b.menu_id from
       (select a.* from sys_role a limit #{params.curPage}, #{params.limit}) a
-      left join sys_role_permission b on a.id=b.role_id
+      left join sys_role_menu b on a.id=b.role_id
       where 1=1
         <if test="params.roleName!=null and params.roleName!=''">
             and a.role_name like concat('%',#{params.roleName},'%')

@@ -31,14 +31,14 @@
         </collection>
     </resultMap>
     <select id="listUser" resultMap="ListMap">
-        select 
+        select
         a.*,
         b.role_id
         from ( select a.* from sys_user a limit #{params.curPage}, #{params.limit}) a
         left join sys_user_role b on a.id=b.user_id
         where a.del_flag=0
-        <if test="params.userName!=null and params.userName!=''">
-            and a.username like concat('%',#{params.userName},'%')
+        <if test="params.username!=null and params.username!=''">
+            and a.username like concat('%',#{params.username},'%')
         </if>
         <if test="params.state!=null and params.state!=''">
             and a.state like concat('%',#{params.state},'%')

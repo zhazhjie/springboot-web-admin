@@ -23,12 +23,12 @@ import java.util.Map;
  * @since 2019-09-04
  */
 @RestController
-@RequestMapping("/sys/role")
+@RequestMapping("/sysRole")
 public class SysRoleController extends BaseController {
     @Autowired
     SysRoleService sysRoleService;
 
-    @GetMapping("/list")
+    @GetMapping("/listAll")
     @RequiresPermissions("sys:role:list")
     public ResponseData list() {
         List<SysRole> list = sysRoleService.list(1L);
@@ -42,24 +42,24 @@ public class SysRoleController extends BaseController {
         return ResponseData.success(sysRoleIPage);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/updateById")
     @RequiresPermissions("sys:role:update")
     public ResponseData update(@RequestBody @Valid SysRole sysRole) {
         sysRoleService.update(sysRole);
         return ResponseData.success();
     }
 
-    @PutMapping("/add")
+    @PostMapping("/save")
     @RequiresPermissions("sys:role:add")
     public ResponseData add(@RequestBody @Valid SysRole sysRole) {
         sysRoleService.add(sysRole);
         return ResponseData.success();
     }
 
-    @DeleteMapping("/delete")
+    @GetMapping("/deleteById")
     @RequiresPermissions("sys:role:delete")
-    public ResponseData delete(@RequestBody List<Long> ids) {
-        sysRoleService.delete(ids);
+    public ResponseData delete(@RequestParam Long id) {
+        sysRoleService.removeById(id);
         return ResponseData.success();
     }
 }

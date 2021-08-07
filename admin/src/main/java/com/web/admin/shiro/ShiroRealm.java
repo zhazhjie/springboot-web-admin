@@ -1,9 +1,9 @@
 package com.web.admin.shiro;
 
-import com.web.admin.modules.sys.entity.po.SysPermission;
+import com.web.admin.modules.sys.entity.po.SysMenu;
 import com.web.admin.modules.sys.entity.po.SysUser;
 import com.web.admin.modules.sys.entity.po.SysUserToken;
-import com.web.admin.modules.sys.service.SysPermissionService;
+import com.web.admin.modules.sys.service.SysMenuService;
 import com.web.admin.modules.sys.service.SysUserService;
 import com.web.admin.modules.sys.service.SysUserTokenService;
 import com.web.common.utils.SysConstant;
@@ -24,7 +24,7 @@ public class ShiroRealm extends AuthorizingRealm {
     @Autowired
     private SysUserService sysUserService;
     @Autowired
-    private SysPermissionService sysPermissionService;
+    private SysMenuService sysMenuService;
     @Autowired
     private SysUserTokenService sysUserTokenService;
 
@@ -37,10 +37,10 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         SysUser user = (SysUser) principals.getPrimaryPrincipal();
-        List<SysPermission> sysPermissions = sysPermissionService.listUserPermission(user.getId(), SysConstant.SysPermissionType.INTERFACE.getValue());
+        List<SysMenu> sysMenus = sysMenuService.listUserMenu(user.getId(), SysConstant.SysMenuType.BUTTON.getValue());
         Set<String> permsSet = new HashSet<>();
-        sysPermissions.forEach(permission -> {
-            permsSet.add(permission.getPermissionFlag());
+        sysMenus.forEach(permission -> {
+            permsSet.add(permission.getPerms());
         });
         authorizationInfo.setStringPermissions(permsSet);
         return authorizationInfo;

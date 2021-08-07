@@ -9,13 +9,14 @@ public class SysConstant implements Serializable {
     public static Integer YES = 1;
     public static Integer NO = 0;
 
-    public enum SysPermissionType {
-        MENU(0, "菜单"),
-        INTERFACE(1, "接口");
+    public enum SysMenuType {
+        DIR(0, "目录"),
+        MENU(1, "菜单"),
+        BUTTON(2, "接口");
         private Integer value;
         private String label;
 
-        SysPermissionType(Integer value, String label) {
+        SysMenuType(Integer value, String label) {
             this.value = value;
             this.label = label;
         }

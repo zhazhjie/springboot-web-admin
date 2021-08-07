@@ -37,6 +37,6 @@ public class SysRole extends BaseModel {
     private Long createBy;
 
     @TableField(exist = false)
-    private List<Long> permissionIdList;
+    private List<Long> menuIdList;
 
 }

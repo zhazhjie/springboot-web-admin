@@ -55,8 +55,8 @@ public class ShiroConfig {
         shiroFilter.setFilters(filters);
 
         Map<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/sys/login", "anon");
-        filterMap.put("/sys/logout", "anon");
+        filterMap.put("/sysUser/login", "anon");
+        filterMap.put("/sysUser/logout", "anon");
         filterMap.put("/static/**", "anon");
         filterMap.put("/upload/**", "anon");
         filterMap.put("/*.html", "anon");

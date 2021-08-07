@@ -13,8 +13,8 @@ import lombok.Data;
  * @since 2019-09-04
  */
 @Data
-@TableName("sys_role_permission")
-public class SysRolePermission extends BaseModel {
+@TableName("sys_role_menu")
+public class SysRoleMenu extends BaseModel {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class SysRolePermission extends BaseModel {
     /**
      * 权限ID
      */
-    private Long permissionId;
+    private Long menuId;
 
 
 }

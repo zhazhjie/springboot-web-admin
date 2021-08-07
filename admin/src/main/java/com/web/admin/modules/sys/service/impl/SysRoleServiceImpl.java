@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.web.admin.modules.sys.entity.po.SysRole;
 import com.web.admin.modules.sys.entity.po.SysUserRole;
 import com.web.admin.modules.sys.mapper.SysRoleMapper;
-import com.web.admin.modules.sys.service.SysRolePermissionService;
+import com.web.admin.modules.sys.service.SysRoleMenuService;
 import com.web.admin.modules.sys.service.SysRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.web.admin.modules.sys.service.SysUserRoleService;
@@ -31,7 +31,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Autowired
     SysUserRoleService sysUserRoleService;
     @Autowired
-    SysRolePermissionService sysRolePermissionService;
+    SysRoleMenuService sysRoleMenuService;
 
     @Override
     public List<SysRole> list(Long userId) {
@@ -56,15 +56,15 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional(rollbackFor = Exception.class)
     public void add(SysRole sysRole) {
         baseMapper.insert(sysRole);
-        sysRolePermissionService.saveRolePermission(sysRole.getId(),sysRole.getPermissionIdList());
+        sysRoleMenuService.saveRoleMenu(sysRole.getId(),sysRole.getMenuIdList());
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(SysRole sysRole) {
         baseMapper.updateById(sysRole);
-        sysRolePermissionService.deleteByRoleId(sysRole.getId());
-        sysRolePermissionService.saveRolePermission(sysRole.getId(),sysRole.getPermissionIdList());
+        sysRoleMenuService.deleteByRoleId(sysRole.getId());
+        sysRoleMenuService.saveRoleMenu(sysRole.getId(),sysRole.getMenuIdList());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             List<SysUserRole> byRoleId = sysUserRoleService.getByRoleId(id);
             AssertUtil.isFalse(byRoleId.size() > 0, "该角色已被使用，不能删除");
             baseMapper.deleteById(id);
-            sysRolePermissionService.deleteByRoleId(id);
+            sysRoleMenuService.deleteByRoleId(id);
         });
     }
 }
