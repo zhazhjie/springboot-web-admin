@@ -45,6 +45,7 @@ public class ShiroFilters extends AuthenticatingFilter {
         if (StringUtils.isBlank(token)) {
             HttpServletResponse httpResponse = setResponseHeaders(response);
             String json = JSON.toJSONString(ResponseData.fail(HttpStatus.UNAUTHORIZED.value(), "登录失效"));
+            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             httpResponse.getWriter().print(json);
             return false;
         }
@@ -60,8 +61,10 @@ public class ShiroFilters extends AuthenticatingFilter {
             int code;
             if (e instanceof LockedAccountException) {
                 code = HttpStatus.FORBIDDEN.value();
+                httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
             }else{
                 code =HttpStatus.UNAUTHORIZED.value();
+                httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
             String json=JSON.toJSONString(ResponseData.fail(code, e.getMessage()));
             httpResponse.getWriter().print(json);
